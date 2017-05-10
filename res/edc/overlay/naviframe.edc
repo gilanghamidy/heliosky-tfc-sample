@@ -1,0 +1,1202 @@
+/*
+* Copyright (c) 2010 Samsung Electronics Co., Ltd All Rights Reserved
+*
+* BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*
+*   1. Redistributions of source code must retain the above copyright notice, this
+*      list of conditions and the following disclaimer.
+*   2. Redistributions in binary form must reproduce the above copyright notice,
+*      this list of conditions and the following disclaimer in the documentation
+*      and/or other materials provided with the distribution.
+*
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+* ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+* ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+* LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+collections {
+   base_scale: 2.6;
+   #define GLIDE_EASE_OUT(duration) CUBIC_BEZIER (duration) 0.25 0.46 0.45 1.0
+   #define NAVIFRAME_BG_PORTRAIT_HEIGHT_INC 1280
+   #define NAVIFRAME_BG_LANDSCAPE_HEIGHT_INC 720
+   #define NAVIFRAME_TITLE_HEIGHT_INC 110
+   #define NAVIFRAME_SUBTITLE_HEIGHT_INC 38
+   #define NAVIFRAME_TITLE_TOP_PADDING_HEIGHT_INC 3
+   #define NAVIFRAME_SUBTITLE_BOTTOM_PADDING_HEIGHT_INC 3
+   #define NAVIFRAME_TABBAR_HEIGHT_INC 110
+   #define NAVIFRAME_TABBAR_TITLE_TOP_PADDING_HEIGHT_INC 80
+   #define NAVIFRAME_TABBAR_TITLE_HEIGHT_INC 100
+   #define NAVIFRAME_TABBAR_TITLE_CLIPPER_HEIGHT_INC 80
+   #define NAVIFRAME_TABBAR_LIGHT_VIEW_HEIGHT_INC 86
+   #define NAVIFRAME_NAVIGATIONBAR_HEIGHT_INC 70
+   #define NAVIFRAME_NAVIGATIONBAR_TOP_DIVIDER_HEIGHT_INC 2
+   #define NAVIFRAME_TABBAR2_HEIGHT_INC 144
+   #define NAVIFRAME_TABBAR_TOP_DIVIDER_HEIGHT_INC 0
+   #define NAVIFRAME_TITLE_LEFT_EFFECT_PADDING_WIDTH_INC 8
+   #define NAVIFRAME_TITLE_LEFT_PADDING_WIDTH_INC 32
+   #define NAVIFRAME_TITLE_RIGHT_EFFECT_PADDING_WIDTH_INC 8
+   #define NAVIFRAME_TITLE_RIGHT_PADDING_WIDTH_INC 32
+   #define NAVIFRAME_TITLE_FUNC_BTN_SIZE_INC 176 110
+   #define NAVIFRAME_BADGE_ICON_LEFT_PADDING_WIDTH_INC 22
+   #define NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC 22
+   #define NAVIFRAME_BADGE_HEIGHT_INC 48
+   #define NAVIFRAME_BADGE2_PADDING_WIDTH_INC (NAVIFRAME_BADGE_ICON_LEFT_PADDING_WIDTH_INC + NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC + NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC)
+   #define NAVIFRAME_DRAWERS_WIDTH_INC 82
+   #define NAVIFRAME_TOOLBAR_HEIGHT_INC 152
+   #define NAVIFRAME_TOOLBAR_COLOR_INC 250 250 250 255
+   #define NAVIFRAME_TOOLBAR_LEFT_TOP_PADDING_WIDTH_INC 32 23
+   #define NAVIFRAME_TOOLBAR_RIGHT_BOTTOM_PADDING_WIDTH_INC 32 23
+   #define NAVIFRAME_BACK_BUTTON_LR_PADDING_WIDTH_INC 10
+   #define NAVIFRAME_BACK_BUTTON_TITLE_RIGHT_PADDING_WIDTH_INC 90
+   #define NAVIFRAME_TITLE_TEXT_FONT_SIZE_INC 50
+   #define NAVIFRAME_SUBTITLE_VISIBLE_TEXT_FONT_SIZE_INC 42
+   #define NAVIFRAME_VISIBLE_TEXT_FONT_SIZE_INC 28
+   #define NAVIFRAME_TITLE_TEXT_FONT_RANGE_INC 36 50
+   #define NAVIFRAME_SUBTITLE_VISIBLE_TEXT_FONT_RANGE_INC 36 42
+   #define BUTTON_NAVIFRAME_TITLE_BUTTON_SIZE_INC 67 67
+   #define BUTTON_NAVIFRAME_TITLE_BUTTON_BG_SIZE_INC 67 67
+   #define BUTTON_NAVIFRAME_TITLE_BUTTON_IMAGE_SIZE_INC 67 67
+   #define BUTTON_NAVIFRAME_DRAWERS_WIDTH_INC 55
+   #define BUTTON_NAVIFRAME_DRAWERS_IMAGE_SIZE_INC 55 72
+   #define BUTTON_NAVIFRAME_BACK_BUTTON_SIZE_INC 80 80
+   #define BUTTON_NAVIFRAME_BACK_BUTTON_EFFECT_MAX_SIZE_INC 80 80
+   #define BUTTON_NAVIFRAME_BACK_CORNER_RADIUS "10"
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_MIN_SIZE_INC 73 86
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_MAX_SIZE_INC 176 110
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_EFFECT_SIZE_INC 167 94
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_LEFT_PADDING_WIDTH_INC 32
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_RIGHT_PADDING_WIDTH_INC 14
+   #define BUTTON_NAVIFRAME_TITLE_LEFT_BUTTON_TEXT_HEIGHT_INC 86
+   #define BUTTON_NAVIFRAME_TITLE_RIGHT_BUTTON_EFFECT_SIZE_INC 167 94
+   #define BUTTON_NAVIFRAME_TITLE_RIGHT_BUTTON_LEFT_PADDING_WIDTH_INC 14
+   #define BUTTON_NAVIFRAME_TITLE_RIGHT_BUTTON_RIGHT_PADDING_WIDTH_INC 32
+   #define BUTTON_NAVIFRAME_TITLE_RIGHT_BUTTON_TEXT_HEIGHT_INC 86
+   #define BUTTON_NAVIFRAME_TITLE_CORNER_RADIUS "10"
+   #define NAVIFRAME_VIEW_PUSH_TRANS_TIME 0.2
+   #define NAVIFRAME_VIEW_POP_TRANS_TIME 0.2
+   styles {
+      style { name: "naviframe_title_style";
+         base: "font=Tizen:style=Condensed align=center font_size="NAVIFRAME_TITLE_TEXT_FONT_SIZE_INC" color=#FFFFFFFF wrap=none ellipsis=1.0 text_class=tizen";
+         tag:  "br" "\n";
+         tag:  "tab" "\t";
+      }
+      style { name: "naviframe_subtitle_visible_style";
+         base: "font=Tizen:style=Condensed align=center font_size="NAVIFRAME_SUBTITLE_VISIBLE_TEXT_FONT_SIZE_INC" color=#FFFFFFFF wrap=none ellipsis=1.0 text_class=tizen";
+         tag:  "br" "\n";
+         tag:  "tab" "\t";
+      }
+      style { name: "naviframe_subtitle_style";
+         base: "font=Tizen:style=Condensed align=center font_size="NAVIFRAME_VISIBLE_TEXT_FONT_SIZE_INC" color=#FFFFFFFF wrap=none ellipsis=1.0 text_class=tizen";
+         tag:  "br" "\n";
+         tag:  "tab" "\t";
+      }
+   }
+   group { name: "elm/naviframe/base/default";
+      parts {
+         part { name: "bg";
+            type: RECT;
+            description { state: "default" 0.0;
+               color: 0 0 0 0;
+            }
+         }
+      }
+   }
+   group { name: "elm/naviframe/item/basic/default";
+      script {
+         public landscape_mode = 0;
+         //Landscape status
+         public prev_btn_visible = 0;
+         //Previous button visible status
+         public title_left_btn_visible = 0;
+         //Title left button visible status
+         public title_right_btn_visible = 0;
+         //Title right button visible status
+         public tabbar_visible = 0;
+         //Tabbar visible status (This value is used for tabbar group)
+      }
+      parts {
+         part { name: "bg_img";
+            type: IMAGE;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "clipper";
+            description { state: "default" 0.0;
+               rel1.to: "base";
+               rel2.to: "base";
+               align: 0.5 0.0;
+               fixed: 0 1;
+               min: 0 NAVIFRAME_BG_PORTRAIT_HEIGHT_INC;
+            }
+            description { state: "landscape" 0.0;
+               inherit: "default" 0.0;
+               min: 0 NAVIFRAME_BG_LANDSCAPE_HEIGHT_INC;
+            }
+         }
+         part { name: "base";
+            type: SPACER;
+            description { state: "default" 0.0;
+            }
+            description { state: "hidden" 0.0;
+               rel1.relative: 1.0 0.0;
+               rel2.relative: 2.0 1.0;
+            }
+            description { state: "leftout" 0.0;
+               rel1.relative: -0.2 0.0;
+               rel2.relative: 0.8 1.0;
+            }
+         }
+         part { name: "clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "pop_clipper";
+            description { state: "default" 0.0;
+               visible: 1;
+            }
+            description { state: "hidden" 0.0;
+               visible: 0;
+            }
+         }
+         part { name: "pop_clipper";
+            type: RECT;
+            mouse_events: 0;
+            description { state: "default" 0.0;
+               color: 255 255 255 255;
+               /*(Changeable UI) color_class: "B0211";*/
+            }
+            description { state: "leftout" 0.0;
+               rel1.relative: 0.0 0.0;
+               rel2.relative: 0.0 1.0;
+            }
+         }
+         part { name: "title_bg";
+            type: RECT;
+            scale: 1;
+            mouse_events: 0;
+            description { state: "default" 0.0;
+               min: 0 NAVIFRAME_TITLE_HEIGHT_INC;
+               max: -1 NAVIFRAME_TITLE_HEIGHT_INC;
+               align: 0.0 0.0;
+               fixed: 0 1;
+               color: 31 32 34 255;
+               rel1 {
+                  to: "base";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to: "base";
+                  relative: 1.0 0.0;
+               }
+            }
+            description { state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               min: 0 0;
+               max: -1 0;
+            }
+         }
+         part { name: "title_clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "clipper";
+            description { state: "default" 0.0;
+               rel1.to_y: "title_bg";
+               rel2.to_y: "title_bg";
+            }
+            description { state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+         part { name: "title_text_left_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               rel1.to: "title_bg";
+               rel2.to: "title_left_btn_bg";
+            }
+            description { state: "title_badge_visible" 0.0;
+               rel1.to: "title_bg";
+               rel2.to: "title_badge2_padding";
+            }
+            description { state: "prev_btn_visible" 0.0;
+               rel1.to: "title_bg";
+               rel2 {
+                  to_x: "elm.swallow.prev_btn";
+                  to_y: "title_bg";
+                  relative: 1.0 1.0;
+               }
+            }
+         }
+         part { name: "title_text_right_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               rel1.to: "title_right_btn_bg";
+               rel2.to: "title_bg";
+            }
+            description { state: "title_badge_visible" 0.0;
+               rel1.to: "badge_icon_left_padding";
+               rel2.to: "title_bg";
+            }
+            description { state: "prev_btn_visible" 0.0;
+               rel1.to: "prev_btn_title_right_padding";
+               rel2.to: "title_bg";
+            }
+         }
+         part { name: "elm.text.title";
+            type: TEXTBLOCK;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "title_text_clipper";
+            description { state: "default" 0.0;
+               text {
+                  style: "naviframe_title_style";
+                  size: NAVIFRAME_TITLE_TEXT_FONT_SIZE_INC;
+                  size_range: NAVIFRAME_TITLE_TEXT_FONT_RANGE_INC;
+                  fit: 1 0;
+               }
+               fixed: 1 1;
+               rel1 {
+                  to_x: "title_text_left_padding";
+                  to_y: "title_bg";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_text_right_padding";
+                  to_y: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "subtitle_visible" 0.0;
+               text {
+                  style: "naviframe_subtitle_visible_style";
+                  size: NAVIFRAME_SUBTITLE_VISIBLE_TEXT_FONT_SIZE_INC;
+                  size_range: NAVIFRAME_SUBTITLE_VISIBLE_TEXT_FONT_RANGE_INC;
+                  fit: 1 0;
+               }
+               fixed: 1 1;
+               rel1 {
+                  to_x: "title_text_left_padding";
+                  to_y: "title_top_padding";
+                  relative: 1.0 1.0;
+               }
+               rel2 {
+                  to_x: "title_text_right_padding";
+                  to_y: "elm.text.subtitle";
+                  relative: 0.0 0.0;
+               }
+            }
+         }
+         part { name: "title_text_clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               rel1.to: "elm.text.title";
+               rel2.to: "elm.text.title";
+            }
+         }
+         part { name: "title_top_padding";
+            type: SPACER;
+            description { state: "default" 0.0;
+               min: 0 NAVIFRAME_TITLE_TOP_PADDING_HEIGHT_INC;
+               max: -1 NAVIFRAME_TITLE_TOP_PADDING_HEIGHT_INC;
+               fixed: 0 1;
+               align: 0.5 0.0;
+               rel1 {
+                  to: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 1.0 0.0;
+               }
+            }
+         }
+         part { name: "elm.text.subtitle";
+            type: TEXTBLOCK;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "subtitle_text_clipper";
+            description { state: "default" 0.0;
+               text {
+                  style: "naviframe_subtitle_style";
+               }
+               min: 0 NAVIFRAME_SUBTITLE_HEIGHT_INC;
+               max: -1 NAVIFRAME_SUBTITLE_HEIGHT_INC;
+               fixed: 1 1;
+               align: 0.5 1.0;
+               rel1 {
+                  to_x: "title_text_left_padding";
+                  to_y: "subtitle_bottom_padding";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_text_right_padding";
+                  to_y: "subtitle_bottom_padding";
+                  relative: 0.0 0.0;
+               }
+            }
+         }
+         part { name: "subtitle_text_clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               rel1.to: "elm.text.subtitle";
+               rel2.to: "elm.text.subtitle";
+            }
+         }
+         part { name: "subtitle_bottom_padding";
+            type: SPACER;
+            description { state: "default" 0.0;
+               min: 0 NAVIFRAME_SUBTITLE_BOTTOM_PADDING_HEIGHT_INC;
+               max: -1 NAVIFRAME_SUBTITLE_BOTTOM_PADDING_HEIGHT_INC;
+               fixed: 0 1;
+               align: 0.5 1.0;
+               rel1 {
+                  to: "title_bg";
+                  relative: 0.0 1.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 1.0 1.0;
+               }
+            }
+         }
+         part { name: "click_event_area";
+            type: RECT;
+            ignore_flags: ON_HOLD;
+            description { state: "default" 0.0;
+               rel1.to: "title_bg";
+               rel2.to: "title_bg";
+               color: 0 0 0 0;
+            }
+         }
+         part { name: "access.title";
+            type: RECT;
+            repeat_events: 1;
+            description { state: "default" 0.0;
+               rel1.to: "title_bg";
+               rel2.to: "title_bg";
+               color: 0 0 0 0;
+            }
+         }
+         part { name: "elm.swallow.icon";
+            type: SWALLOW;
+            scale: 1;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               max: 0 0;
+               fixed: 1 0;
+               align: 0.0 0.5;
+               rel1 {
+                  relative: 1.0 0.0;
+                  to: "title_left_padding";
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  to: "title_left_padding";
+               }
+               visible: 0;
+            }
+         }
+         part { name: "badge_icon_left_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+               fixed: 1 0;
+               align: 1.0 0.5;
+               rel1 {
+                  to_x: "badge_text_left_padding";
+                  to_y: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to_x: "badge_text_left_padding";
+                  to_y: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_BADGE_ICON_LEFT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BADGE_ICON_LEFT_PADDING_WIDTH_INC -1;
+            }
+         }
+         part { name: "badge_icon";
+            type: IMAGE;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 0;
+               fixed: 1 1;
+               rel1 {
+                  to_x: "badge_text_left_padding";
+                  to_y: "title_badge";
+               }
+               rel2 {
+                  to_x: "badge_text_right_padding";
+                  to_y: "title_badge";
+               }
+               color: 195 219 226 255;
+               visible: 0;
+            }
+            description { state: "visible" 0.0;
+               rel1 {
+                  to_x: "badge_text_left_padding";
+                  to_y: "title_badge";
+               }
+               rel2 {
+                  to_x: "badge_text_right_padding";
+                  to_y: "title_badge";
+               }
+               color: 195 219 226 255;
+               visible: 1;
+            }
+         }
+         part { name: "badge_text_left_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+               fixed: 1 0;
+               align: 1.0 0.5;
+               rel1 {
+                  to_x: "title_badge";
+                  to_y: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_badge";
+                  to_y: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC -1;
+            }
+         }
+         part { name: "badge_text_right_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+               fixed: 1 0;
+               align: 1.0 0.5;
+               rel1 {
+                  to_x: "title_right_padding";
+                  to_y: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_right_padding";
+                  to_y: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BADGE_TEXT_LEFT_PADDING_WIDTH_INC -1;
+            }
+         }
+         part { name: "title_badge";
+            type: TEXT;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               text {
+                  font: "Tizen:style=Regular";
+                  size: "32";
+                  text_class: "tizen";
+                  min: 1 0;
+                  max: 1 0;
+                  align: 1.0 0.5;
+                  ellipsis: -1;
+               }
+               color: 7 7 7 255;
+               min: 0 NAVIFRAME_BADGE_HEIGHT_INC;
+               max: -1 NAVIFRAME_BADGE_HEIGHT_INC;
+               fixed: 1 1;
+               align: 1.0 0.5;
+               rel1 {
+                  to_x: "badge_text_right_padding";
+                  to_y: "elm.text.title";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to_x: "badge_text_right_padding";
+                  to_y: "elm.text.title";
+                  relative: 0.0 1.0;
+               }
+            }
+         }
+         part { name: "title_badge2";
+            type: TEXT;
+            scale: 1;
+            mouse_events: 0;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               text {
+                  font: "Tizen:style=Regular";
+                  size: "32";
+                  text_class: "tizen";
+                  min: 1 0;
+                  max: 1 0;
+                  align: 0.0 0.5;
+                  ellipsis: -1;
+               }
+               color: 7 7 7 255;
+               min: 0 NAVIFRAME_BADGE_HEIGHT_INC;
+               max: -1 NAVIFRAME_BADGE_HEIGHT_INC;
+               fixed: 1 1;
+               align: 0.0 0.5;
+               rel1 {
+                  to_x: "title_left_padding";
+                  to_y: "elm.text.title";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_left_padding";
+                  to_y: "elm.text.title";
+                  relative: 1.0 1.0;
+               }
+               visible: 0;
+            }
+         }
+         part { name: "title_badge2_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+               fixed: 1 0;
+               align: 0.0 0.5;
+               rel1 {
+                  to_x: "title_badge2";
+                  to_y: "title_bg";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to_x: "title_badge2";
+                  to_y: "title_bg";
+                  relative: 1.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_BADGE2_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BADGE2_PADDING_WIDTH_INC -1;
+            }
+         }
+         part { name: "title_left_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: NAVIFRAME_TITLE_LEFT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_TITLE_LEFT_PADDING_WIDTH_INC -1;
+               fixed: 1 0;
+               align: 0.0 0.0;
+               rel1 {
+                  to: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+            }
+         }
+         part { name: "title_left_btn_bg";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               fixed: 1 0;
+               align: 0.0 0.5;
+               rel1 {
+                  to: "title_left_padding";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to: "title_left_padding";
+                  relative: 1.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_TITLE_FUNC_BTN_SIZE_INC;
+               max: NAVIFRAME_TITLE_FUNC_BTN_SIZE_INC;
+            }
+         }
+         part { name: "title_left_btn";
+            type: SWALLOW;
+            scale: 1;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               fixed: 1 1;
+               rel1.to: "title_left_btn_bg";
+               rel2.to: "title_left_btn_bg";
+               visible: 0;
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+         }
+         part { name: "title_right_btn_bg";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: 0 0;
+               fixed: 1 0;
+               align: 1.0 0.5;
+               rel1 {
+                  to: "title_right_padding";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to: "title_right_padding";
+                  relative: 0.0 1.0;
+               }
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: NAVIFRAME_TITLE_FUNC_BTN_SIZE_INC;
+               max: NAVIFRAME_TITLE_FUNC_BTN_SIZE_INC;
+            }
+         }
+         part { name: "title_right_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: NAVIFRAME_TITLE_RIGHT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_TITLE_RIGHT_PADDING_WIDTH_INC -1;
+               fixed: 1 0;
+               align: 1.0 0.0;
+               rel1 {
+                  to: "title_bg";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 1.0 1.0;
+               }
+            }
+            description { state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               min: 0 0;
+               max: 0 -1;
+            }
+         }
+         part { name: "title_right_btn";
+            type: SWALLOW;
+            scale: 1;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               fixed: 1 1;
+               rel1.to: "title_right_btn_bg";
+               rel2.to: "title_right_btn_bg";
+               visible: 0;
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+         }
+         part { name: "elm.swallow.content";
+            type: SWALLOW;
+            scale: 1;
+            repeat_events: 0;
+            clip_to: "content_clipper";
+            description { state: "default" 0.0;
+               align: 0.0 0.0;
+               rel1 {
+                  to_x: "base";
+                  to_y: "title_bg";
+                  relative: 0.0 1.0;
+               }
+               rel2 {
+                  to_x: "base";
+                  to_y: "toolbar";
+                  relative: 1.0 0.0;
+               }
+            }
+         }
+         part { name: "content_clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "clipper";
+            description { state: "default" 0.0;
+               rel1.to_y: "elm.swallow.content";
+               rel2.to_y: "elm.swallow.content";
+            }
+         }
+         part { name: "toolbar_bg";
+            type: RECT;
+            scale: 1;
+            clip_to: "toolbar_clipper";
+            description { state: "default" 0.0;
+               rel1.to: "toolbar";
+               rel2.to: "toolbar";
+               color: NAVIFRAME_TOOLBAR_COLOR_INC;
+            }
+         }
+         part { name: "toolbar";
+            type: SWALLOW;
+            scale: 1;
+            clip_to: "toolbar_clipper";
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: -1 0;
+               fixed: 0 1;
+               align: 0.5 1.0;
+               rel1 {
+                  to: "base";
+                  relative: 0.0 1.0;
+               }
+               rel2 {
+                  to: "base";
+                  relative: 1.0 1.0;
+               }
+               visible: 0;
+            }
+            description { state: "visible" 0.0;
+               inherit: "default" 0.0;
+               min: 0 NAVIFRAME_TOOLBAR_HEIGHT_INC;
+               max: -1 NAVIFRAME_TOOLBAR_HEIGHT_INC;
+               visible: 1;
+            }
+         }
+         part { name: "toolbar_clipper";
+            type: RECT;
+            mouse_events: 0;
+            clip_to: "clipper";
+            description { state: "default" 0.0;
+               rel1.to: "toolbar";
+               rel2.to: "toolbar";
+            }
+         }
+         part { name: "prev_btn_left_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: NAVIFRAME_BACK_BUTTON_LR_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BACK_BUTTON_LR_PADDING_WIDTH_INC -1;
+               align: 0.0 0.0;
+               fixed: 1 1;
+               rel1 {
+                  to: "title_bg";
+                  relative: 0.0 0.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 0.0 1.0;
+               }
+            }
+         }
+         part { name: "elm.swallow.prev_btn";
+            type: SWALLOW;
+            clip_to: "title_clipper";
+            scale: 1;
+            description { state: "default" 0.0;
+               min: BUTTON_NAVIFRAME_BACK_BUTTON_SIZE_INC;
+               max: BUTTON_NAVIFRAME_BACK_BUTTON_SIZE_INC;
+               align: 0.0 0.5;
+               fixed: 1 1;
+               rel1 {
+                  to: "prev_btn_left_padding";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to: "prev_btn_left_padding";
+                  relative: 1.0 1.0;
+               }
+               visible: 1;
+            }
+            description { state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+         part { name: "prev_btn_title_right_padding";
+            type: SPACER;
+            scale: 1;
+            description { state: "default" 0.0;
+               min: NAVIFRAME_BACK_BUTTON_TITLE_RIGHT_PADDING_WIDTH_INC 0;
+               max: NAVIFRAME_BACK_BUTTON_TITLE_RIGHT_PADDING_WIDTH_INC -1;
+               align: 1.0 0.0;
+               fixed: 1 1;
+               rel1 {
+                  to: "title_bg";
+                  relative: 1.0 0.0;
+               }
+               rel2 {
+                  to: "title_bg";
+                  relative: 1.0 1.0;
+               }
+            }
+         }
+         part { name: "toolbar_more_btn";
+            type: SWALLOW;
+            clip_to: "title_clipper";
+            description { state: "default" 0.0;
+               min: 0 0;
+               max: 0 0;
+               align: 0.0 0.0;
+               fixed: 1 1;
+               rel1.to: "base";
+               rel2.to: "base";
+               visible: 0;
+            }
+         }
+      }
+      programs {
+         program { name: "content_new_pushed";
+            signal: "elm,state,new,pushed,deferred";
+            source: "elm";
+            action: STATE_SET "default" 0.0;
+            target: "base";
+            transition: GLIDE_EASE_OUT(NAVIFRAME_VIEW_PUSH_TRANS_TIME);
+            after: "show_finished";
+         }
+         program { name: "content_cur_pushed";
+            signal: "elm,state,cur,pushed,deferred";
+            source: "elm";
+            action: STATE_SET "leftout" 0.0;
+            target: "base";
+            transition: GLIDE_EASE_OUT(NAVIFRAME_VIEW_PUSH_TRANS_TIME);
+            after: "pushed_finished";
+            after: "restore_default";
+         }
+         program { name: "content_prev_popped";
+            signal: "elm,state,prev,popped,deferred";
+            source: "elm";
+            action: STATE_SET "default" 0.0;
+            target: "base";
+            target: "pop_clipper";
+            transition: GLIDE_EASE_OUT(NAVIFRAME_VIEW_POP_TRANS_TIME);
+            after: "show_finished";
+         }
+         program { name: "content_cur_popped";
+            signal: "elm,state,cur,popped,deferred";
+            source: "elm";
+            action: STATE_SET "hidden" 0.0;
+            target: "base";
+            transition: GLIDE_EASE_OUT(NAVIFRAME_VIEW_POP_TRANS_TIME);
+            after: "popped_finished";
+         }
+         program { name: "new_pushed";
+            signal: "elm,state,new,pushed";
+            source: "elm";
+            action: STATE_SET "hidden" 0.0;
+            target: "base";
+         }
+         program { name: "prev_popped";
+            signal: "elm,state,prev,popped";
+            source: "elm";
+            script {
+               set_state(PART:"base", "leftout", 0.0);
+               set_state(PART:"pop_clipper", "leftout", 0.0);
+               set_state(PART:"clipper", "default", 0.0);
+            }
+         }
+         program { name: "show_finished";
+            action: SIGNAL_EMIT "elm,action,show,finished" "";
+         }
+         program { name: "pushed_finished";
+            action: SIGNAL_EMIT "elm,action,pushed,finished" "";
+         }
+         program { name: "restore_default";
+            action: STATE_SET "default" 0.0;
+            target: "base";
+            target: "pop_clipper";
+         }
+         program { name: "popped_finished";
+            action: SIGNAL_EMIT "elm,action,popped,finished" "";
+         }
+         program { name: "visible";
+            signal: "elm,state,visible";
+            source: "elm";
+            action: STATE_SET "default" 0.0;
+            target: "clipper";
+         }
+         program { name: "invisible";
+            signal: "elm,state,invisible";
+            source: "elm";
+            action: STATE_SET "hidden" 0.0;
+            target: "clipper";
+         }
+         program { name: "title_show";
+            signal: "elm,state,title,show";
+            source: "elm";
+            script {
+               set_state(PART:"title_bg", "default", 0.0);
+               set_state(PART:"title_clipper", "default", 0.0);
+               if (get_int(title_left_btn_visible)) {
+                  set_state(PART:"title_left_padding", "hidden", 0.0);
+                  set_state(PART:"title_left_btn_bg", "visible", 0.0);
+                  set_state(PART:"title_left_btn", "visible", 0.0);
+                  set_state(PART:"title_right_btn_bg", "visible", 0.0);
+                  set_state(PART:"title_right_padding", "hidden", 0.0);
+               }
+               else if (get_int(prev_btn_visible)) {
+                  set_state(PART:"elm.swallow.prev_btn", "default", 0.0);
+                  set_state(PART:"title_text_left_padding", "prev_btn_visible", 0.0);
+                  set_state(PART:"title_text_right_padding", "prev_btn_visible", 0.0);
+               }
+               if (get_int(title_right_btn_visible)) {
+                  set_state(PART:"title_right_padding", "hidden", 0.0);
+                  set_state(PART:"title_right_btn_bg", "visible", 0.0);
+                  set_state(PART:"title_right_btn", "visible", 0.0);
+                  set_state(PART:"title_left_btn_bg", "visible", 0.0);
+                  set_state(PART:"title_left_padding", "hidden", 0.0);
+                  if (get_int(prev_btn_visible) == 1){
+                     set_state(PART:"title_text_left_padding", "default", 0.0);
+                     set_state(PART:"title_text_right_padding", "default", 0.0);
+                  }
+               }
+            }
+         }
+         program { name: "title_show_trans";
+            signal: "elm,action,title,show";
+            source: "elm";
+            after: "title_show";
+         }
+         program { name: "title_hide";
+            signal: "elm,state,title,hide";
+            source: "elm";
+            script {
+               set_state(PART:"title_bg", "hidden", 0.0);
+               set_state(PART:"title_clipper", "hidden", 0.0);
+               set_state(PART:"title_left_padding", "default", 0.0);
+               set_state(PART:"title_left_btn_bg", "default", 0.0);
+               set_state(PART:"title_left_btn", "default", 0.0);
+               set_state(PART:"title_right_btn_bg", "default", 0.0);
+               set_state(PART:"title_right_padding", "default", 0.0);
+               set_state(PART:"title_right_btn", "default", 0.0);
+               set_state(PART:"elm.swallow.prev_btn", "hidden", 0.0);
+               if (get_int(prev_btn_visible) == 1){
+                  set_state(PART:"title_text_left_padding", "prev_btn_visible", 0.0);
+                  set_state(PART:"title_text_right_padding", "prev_btn_visible", 0.0);
+               }
+            }
+         }
+         program { name: "title_hide_trans";
+            signal: "elm,action,title,hide";
+            source: "elm";
+            after: "title_hide";
+         }
+         program { name: "subtitle_show";
+            signal: "elm,state,subtitle,show";
+            source: "elm";
+            script {
+               set_state(PART:"elm.text.title", "subtitle_visible", 0.0);
+            }
+         }
+         program { name: "subtitle_hide";
+            signal: "elm,state,subtitle,hide";
+            source: "elm";
+            script {
+               set_state(PART:"elm.text.title", "default", 0.0);
+            }
+         }
+         program { name: "prev_btn_show";
+            signal: "elm,state,prev_btn,show";
+            source: "elm";
+            script {
+               set_int(prev_btn_visible, 1);
+               if (get_int(title_left_btn_visible) == 0) {
+                  set_state(PART:"elm.swallow.prev_btn", "default", 0.0);
+                  set_state(PART:"title_text_left_padding", "prev_btn_visible", 0.0);
+                  set_state(PART:"title_text_right_padding", "prev_btn_visible", 0.0);
+               }
+            }
+         }
+         program { name: "prev_btn_hide";
+            signal: "elm,state,prev_btn,hide";
+            source: "elm";
+            script {
+               set_state(PART:"elm.swallow.prev_btn", "hidden", 0.0);
+               set_state(PART:"title_text_left_padding", "default", 0.0);
+               set_state(PART:"title_text_right_padding", "default", 0.0);
+               set_int(prev_btn_visible, 0);
+            }
+         }
+         program { name: "title_left_btn_show";
+            signal: "elm,state,title_left_btn,show";
+            source: "elm";
+            script {
+               set_state(PART:"title_left_padding", "hidden", 0.0);
+               set_state(PART:"title_left_btn_bg", "visible", 0.0);
+               set_state(PART:"title_left_btn", "visible", 0.0);
+               set_state(PART:"title_right_btn_bg", "visible", 0.0);
+               set_state(PART:"title_right_padding", "hidden", 0.0);
+               set_state(PART:"elm.swallow.prev_btn", "hidden", 0.0);
+               set_state(PART:"title_text_left_padding", "default", 0.0);
+               set_state(PART:"title_text_right_padding", "default", 0.0);
+               set_int(title_left_btn_visible, 1);
+            }
+         }
+         program { name: "title_left_btn_hide";
+            signal: "elm,state,title_left_btn,hide";
+            source: "elm";
+            script {
+               set_state(PART:"title_left_padding", "default", 0.0);
+               set_state(PART:"title_left_btn_bg", "default", 0.0);
+               set_state(PART:"title_left_btn", "default", 0.0);
+               set_state(PART:"title_right_padding", "default", 0.0);
+               set_state(PART:"title_right_btn_bg", "default", 0.0);
+               set_int(title_left_btn_visible, 0);
+               if (get_int(prev_btn_visible) == 1) {
+                  set_state(PART:"elm.swallow.prev_btn", "default", 0.0);
+                  set_state(PART:"title_text_left_padding", "prev_btn_visible", 0.0);
+                  set_state(PART:"title_text_right_padding", "prev_btn_visible", 0.0);
+               }
+            }
+         }
+         program { name: "title_right_btn_show";
+            signal: "elm,state,title_right_btn,show";
+            source: "elm";
+            script {
+               set_state(PART:"title_right_padding", "hidden", 0.0);
+               set_state(PART:"title_right_btn_bg", "visible", 0.0);
+               set_state(PART:"title_right_btn", "visible", 0.0);
+               set_state(PART:"title_left_btn_bg", "visible", 0.0);
+               set_state(PART:"title_left_padding", "hidden", 0.0);
+               if (get_int(prev_btn_visible) == 1){
+                  set_state(PART:"title_text_left_padding", "default", 0.0);
+                  set_state(PART:"title_text_right_padding", "default", 0.0);
+               }
+               set_int(title_right_btn_visible, 1);
+            }
+         }
+         program { name: "title_right_btn_hide";
+            signal: "elm,state,title_right_btn,hide";
+            source: "elm";
+            script {
+               set_state(PART:"title_right_padding", "default", 0.0);
+               set_state(PART:"title_right_btn_bg", "default", 0.0);
+               set_state(PART:"title_right_btn", "default", 0.0);
+               set_state(PART:"title_left_padding", "default", 0.0);
+               set_state(PART:"title_left_btn_bg", "default", 0.0);
+               set_int(title_right_btn_visible, 0);
+               if (get_int(prev_btn_visible) == 1){
+                  set_state(PART:"title_text_left_padding", "prev_btn_visible", 0.0);
+                  set_state(PART:"title_text_right_padding", "prev_btn_visible", 0.0);
+               }
+            }
+         }
+         program { name: "title_badge_show";
+            signal: "elm,state,title_badge,show";
+            source: "elm";
+            script {
+               new buf[128];
+               set_state(PART:"badge_text_left_padding", "visible", 0.0);
+               set_state(PART:"badge_text_right_padding", "visible", 0.0);
+               set_state(PART:"badge_icon", "visible", 0.0);
+               set_state(PART:"badge_icon_left_padding", "visible", 0.0);
+               get_text(PART:"title_badge", buf, 128);
+               set_text(PART:"title_badge2", buf);
+               set_state(PART:"title_badge2_padding", "visible", 0.0);
+               set_state(PART:"title_text_left_padding", "title_badge_visible", 0.0);
+               set_state(PART:"title_text_right_padding", "title_badge_visible", 0.0);
+            }
+         }
+         program { name: "title_badge_hide";
+            signal: "elm,state,title_badge,hide";
+            source: "elm";
+            script {
+               set_state(PART:"badge_text_left_padding", "default", 0.0);
+               set_state(PART:"badge_text_right_padding", "default", 0.0);
+               set_state(PART:"badge_icon", "default", 0.0);
+               set_state(PART:"badge_icon_left_padding", "default", 0.0);
+               set_text(PART:"title_badge2", "");
+               set_state(PART:"title_badge2_padding", "default", 0.0);
+               set_state(PART:"title_text_left_padding", "default", 0.0);
+               set_state(PART:"title_text_right_padding", "default", 0.0);
+            }
+         }
+         program { name: "toolbar_show";
+            signal: "elm,state,toolbar,show";
+            source: "elm";
+            script {
+               set_state(PART:"toolbar", "visible", 0.0);
+            }
+         }
+         program { name: "toolbar_hide";
+            signal: "elm,state,toolbar,hide";
+            source: "elm";
+            script {
+               set_state(PART:"toolbar", "default", 0.0);
+            }
+         }
+         program { name: "title_clicked";
+            signal: "mouse,clicked,1";
+            source: "click_event_area";
+            script {
+               emit("elm,action,title,clicked", "");
+            }
+         }
+         program { name: "change_to_landscape";
+            script {
+               if (!get_int(landscape_mode)) {
+                  set_int(landscape_mode, 1);
+               }
+               set_state(PART:"bg_img", "landscape", 0.0);
+            }
+         }
+         program { name: "change_to_portrait";
+            script {
+               if (get_int(landscape_mode)) {
+                  set_int(landscape_mode, 0);
+               }
+               set_state(PART:"bg_img", "default", 0.0);
+            }
+         }
+         program { name: "landscape_mode";
+            source: "elm";
+            signal: "elm,state,orient,90";
+            after: "change_to_landscape";
+         }
+         program { name: "landscape_mode2";
+            source: "elm";
+            signal: "elm,state,orient,270";
+            after: "change_to_landscape";
+         }
+         program { name: "portrait_mode";
+            source: "elm";
+            signal: "elm,state,orient,0";
+            after: "change_to_portrait";
+         }
+         program { name: "portrait_mode2";
+            source: "elm";
+            signal: "elm,state,orient,180";
+            after: "change_to_portrait";
+         }
+      }
+   }
+}

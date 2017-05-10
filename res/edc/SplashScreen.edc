@@ -1,0 +1,36 @@
+collections {
+   base_scale: 1.0;
+   images {
+      image: "Heliosky-White.png" COMP;
+   }
+   group { name: "main";
+      parts {
+         part {
+            name: "bg";
+            type: RECT;
+            scale: 1;
+            description {
+               state: "default" 0.0;
+               color: 30 31 34 255;
+               rel1.relative: 0.0 0.0;
+               rel2.relative: 1.0 1.0;
+            }
+         }
+         part {
+            name: "logo";
+            type: IMAGE;
+            scale: 1;
+            description {
+               state: "default" 0.0;
+               rel1.relative: 0.1 0.1;
+               rel2.relative: 0.9 0.9;
+               
+               aspect_preference: SOURCE;
+               image {
+                  normal: "Heliosky-White.png";
+               }
+            }
+         }
+      }
+   }
+}
